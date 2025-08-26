@@ -266,7 +266,7 @@
         
         // Your existing API keys
         const OMDB_API_KEY = "7f42561e"; 
-        const llmApiKey = 'YOUR_GEMINI_API_KEY';
+        const llmApiKey = 'AIzaSyAf0Y2PFEQRsZHo6xYfYnI_5VVW6RicDfE';
 
         // Firestore and Auth variables
         let db;
@@ -1261,7 +1261,7 @@
             };
 
             const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${llmApiKey}`;
 
             try {
                 const response = await fetch(apiUrl, {
