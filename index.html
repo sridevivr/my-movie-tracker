@@ -245,6 +245,14 @@
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, onSnapshot, addDoc, query, where, getDocs, doc, deleteDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
+        // **MOVED**: These variables must be at the top level
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const appContainer = document.getElementById('app-container');
+        
+        // Show loading spinner immediately
+        loadingSpinner.classList.remove('hidden');
+        appContainer.classList.add('hidden');
+        
         // Your Firebase project configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCv_jzkokYrVoYBxE2xuyWpIg5hTDr3yCM",
@@ -269,7 +277,6 @@
         
         // Initialize Firebase
         try {
-            // This is the correct and only place to initialize the app
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             auth = getAuth(app);
