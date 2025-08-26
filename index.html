@@ -5,32 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yes, I've Watched this</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCv_jzkokYrVoYBxE2xuyWpIg5hTDr3yCM",
-    authDomain: "movie-tracker-svr.firebaseapp.com",
-    projectId: "movie-tracker-svr",
-    storageBucket: "movie-tracker-svr.firebasestorage.app",
-    messagingSenderId: "964296960808",
-    appId: "1:964296960808:web:9e985ea86f0b70c6843e1d",
-    measurementId: "G-9SY7BLLE59"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for star icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
@@ -106,19 +81,15 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
 
-    <!-- Notification Container -->
     <div id="notification-container" class="fixed top-4 left-1/2 -translate-x-1/2 hidden z-50">
         <div id="notification-message" class="bg-green-500 text-white font-bold py-2 px-6 rounded-xl shadow-lg transform transition-all duration-300">
-            <!-- Message will be dynamically added here -->
-        </div>
+            </div>
     </div>
 
-    <!-- Movie Details Modal -->
     <div id="movie-details-modal" class="modal-overlay hidden">
         <div class="modal-content">
             <span id="close-modal-btn" class="close-btn">&times;</span>
             <div id="modal-content-details">
-                <!-- Movie details will be dynamically added here -->
                 <div class="flex flex-col items-center">
                     <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
                     <p class="mt-4 text-gray-600">Loading details...</p>
@@ -127,7 +98,6 @@
         </div>
     </div>
     
-    <!-- Rewatch Date Modal -->
     <div id="rewatch-modal" class="modal-overlay hidden">
         <div class="modal-content text-center">
             <h3 class="text-2xl font-bold mb-4 text-gray-800">Log Rewatch</h3>
@@ -140,18 +110,14 @@
         </div>
     </div>
 
-    <!-- Main container for the app -->
     <div id="app-container" class="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl w-full hidden">
         <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">
             Yes, I've Watched this
         </h1>
 
-        <!-- User ID display for debugging/collaboration -->
         <p id="user-id-display" class="text-xs text-gray-400 text-center mb-4"></p>
 
-        <!-- Search sections -->
         <div class="mb-6">
-            <!-- OMDb Search -->
             <label for="movie-search-input" class="block text-gray-700 font-semibold mb-2">
                 Search by Title:
             </label>
@@ -162,7 +128,6 @@
                 </button>
             </div>
 
-            <!-- NEW: Natural Language Search -->
             <label for="llm-search-input" class="block text-gray-700 font-semibold mb-2">
                 Or describe a movie you want to find:
             </label>
@@ -174,18 +139,15 @@
             </div>
         </div>
 
-        <!-- Search results section -->
         <div id="search-results" class="mb-8">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 hidden">
                 Search Results:
             </h2>
             <div id="results-list" class="grid gap-4 sm:grid-cols-2">
-                <!-- Search results will be dynamically added here -->
-            </div>
+                </div>
             <div id="no-results" class="text-center text-gray-500 p-4 hidden">
                 No results found. Please try a different search.
             </div>
-            <!-- Loading indicator for LLM search -->
             <div id="llm-loading" class="text-center text-gray-500 p-4 hidden">
                 <div class="flex flex-col items-center">
                     <div class="spinner border-t-4 border-b-4 border-blue-500 rounded-full w-12 h-12"></div>
@@ -194,7 +156,6 @@
             </div>
         </div>
 
-        <!-- NEW: Stats section -->
         <div id="stats-section" class="mb-8 p-6 bg-gray-50 rounded-xl shadow-md">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">My Viewing Stats</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
@@ -221,33 +182,27 @@
             </div>
         </div>
         
-        <!-- NEW: Want to Watch section -->
         <div id="want-to-watch-section" class="mb-8">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Want to Watch:</h2>
             <div id="want-to-watch-list" class="space-y-4">
-                <!-- Items marked as "Want to watch" will go here -->
                 <div class="bg-gray-50 p-4 rounded-xl shadow-md">
                     <p class="font-bold text-gray-800">No items in your watchlist.</p>
                 </div>
             </div>
         </div>
 
-        <!-- NEW: Currently Watching section -->
         <div id="currently-watching-section" class="mb-8">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Currently Watching:</h2>
             <div id="currently-watching-list" class="space-y-4">
-                <!-- Items marked as "Still Watching" will go here -->
                 <div class="bg-gray-50 p-4 rounded-xl shadow-md">
                     <p class="font-bold text-gray-800">No items are currently being watched.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Watched movies section -->
         <div>
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-2xl font-semibold text-gray-800">My Watched List:</h2>
-                <!-- Filter and Sort dropdowns -->
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-2">
                         <label for="filter-list-select" class="text-gray-700">Filter:</label>
@@ -270,7 +225,6 @@
             </div>
             
             <div id="watched-list" class="space-y-4">
-                <!-- Watched movies will be dynamically added here by Firestore listener -->
                 <div class="bg-gray-50 p-4 rounded-xl shadow-md">
                     <p class="font-bold text-gray-800">Loading your watched list...</p>
                     <p class="text-sm text-gray-500">Please wait while we connect to the database.</p>
@@ -279,34 +233,43 @@
         </div>
     </div>
     
-    <!-- Loading spinner for Firebase initialization -->
     <div id="loading-spinner" class="flex flex-col items-center">
       <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
       <p class="mt-4 text-gray-600">Initializing app...</p>
     </div>
 
-    <!-- Firebase SDKs -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        // Import Firebase functions here
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        // Added updateDoc, doc, and arrayUnion for rewatch functionality
         import { getFirestore, collection, onSnapshot, addDoc, query, where, getDocs, doc, deleteDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
+        // Your Firebase project configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCv_jzkokYrVoYBxE2xuyWpIg5hTDr3yCM",
+            authDomain: "movie-tracker-svr.firebaseapp.com",
+            projectId: "movie-tracker-svr",
+            storageBucket: "movie-tracker-svr.firebasestorage.app",
+            messagingSenderId: "964296960808",
+            appId: "1:964296960808:web:9e985ea86f0b70c6843e1d",
+            measurementId: "G-9SY7BLLE59"
+        };
+        
+        // Your existing API keys
         const OMDB_API_KEY = "7f42561e"; 
+        const llmApiKey = 'YOUR_GEMINI_API_KEY';
 
         // Firestore and Auth variables
         let db;
         let auth;
         let userId;
         let activeRewatchDocId = null;
-
-        // An array to hold the watched movies with full details and user data
         let watchedMoviesData = [];
-
+        
         // Initialize Firebase
         try {
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const app = initializeApp(firebaseConfig);
+            // This is the correct and only place to initialize the app
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             auth = getAuth(app);
@@ -332,7 +295,7 @@
             } else {
                 signInAnonymously(auth)
                     .then((userCredential) => {
-                                userId = userCredential.user.uid;
+                        userId = userCredential.user.uid;
                         console.log("Signed in anonymously. User ID:", userId);
                         initApp();
                     });
@@ -372,7 +335,7 @@
                 userIdDisplay.textContent = `User ID: ${userId}`;
 
                 // Set up the Firestore listener for the watched list
-                const watchedMoviesCollection = collection(db, `artifacts/${appId}/users/${userId}/watched-movies`);
+                const watchedMoviesCollection = collection(db, `artifacts/${userId}/watched-movies`);
                 
                 // Use onSnapshot to get real-time updates to the watched list
                 // This listener will now receive full movie data directly from Firestore
@@ -958,8 +921,7 @@
                 console.error("User not authenticated.");
                 return;
             }
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const movieRef = doc(db, `artifacts/${appId}/users/${userId}/watched-movies`, docId);
+            const movieRef = doc(db, `artifacts/${userId}/watched-movies`, docId);
             const today = new Date().toISOString().split('T')[0];
             
             let updateData = { status: newStatus };
@@ -990,8 +952,7 @@
                 console.error("User not authenticated.");
                 return;
             }
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const movieRef = doc(db, `artifacts/${appId}/users/${userId}/watched-movies`, docId);
+            const movieRef = doc(db, `artifacts/${userId}/watched-movies`, docId);
             try {
                 await updateDoc(movieRef, {
                     rewatchDates: arrayUnion(rewatchDate)
@@ -1009,8 +970,7 @@
                 console.error("User not authenticated.");
                 return;
             }
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const movieRef = doc(db, `artifacts/${appId}/users/${userId}/watched-movies`, docId);
+            const movieRef = doc(db, `artifacts/${userId}/watched-movies`, docId);
             try {
                 await updateDoc(movieRef, {
                     startDate: startDate,
@@ -1029,8 +989,7 @@
                 console.error("User not authenticated.");
                 return;
             }
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const movieRef = doc(db, `artifacts/${appId}/users/${userId}/watched-movies`, docId);
+            const movieRef = doc(db, `artifacts/${userId}/watched-movies`, docId);
             try {
                 await updateDoc(movieRef, {
                     userRating: rating
@@ -1053,7 +1012,6 @@
                 <p class="font-semibold text-gray-800 text-lg cursor-pointer">${movie.Title}</p>
                 <p class="text-sm text-gray-500">${movie.Year}</p>
                 
-                <!-- New Dropdown Button -->
                 <div class="relative inline-block text-left">
                     <div>
                         <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="options-menu" aria-haspopup="true" aria-expanded="true">
@@ -1155,8 +1113,7 @@
                 return;
             }
 
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const watchedMoviesCollection = collection(db, `artifacts/${appId}/users/${userId}/watched-movies`);
+            const watchedMoviesCollection = collection(db, `artifacts/${userId}/watched-movies`);
             
             const q = query(watchedMoviesCollection, where("imdbID", "==", movie.imdbID));
             const querySnapshot = await getDocs(q);
@@ -1195,8 +1152,7 @@
                 return;
             }
 
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const movieRef = doc(db, `artifacts/${appId}/users/${userId}/watched-movies`, docId);
+            const movieRef = doc(db, `artifacts/${userId}/watched-movies`, docId);
             
             try {
                 await deleteDoc(movieRef);
